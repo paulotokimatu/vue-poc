@@ -24,9 +24,9 @@ export default {
         return;
       }
     }
-  console.log('ok', this.$route.query.token);
-  // localStorage.setItem(USER_TOKEN_KEY, this.$route.query.token);
-  this.$router.push({ name: 'Protected' });
+    console.log('ok', this.$route.query.token);
+    // localStorage.setItem(USER_TOKEN_KEY, this.$route.query.token);
+    this.$router.push({ name: 'Protected' });
   }
 };
 </script>
