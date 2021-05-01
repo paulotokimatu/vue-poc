@@ -1,20 +1,50 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './views/Home.vue';
+import Protected from './components/app/Protected.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/passport',
+    name: 'Passport',
+    component: () =>
+      import(
+        /* webpackChunkName: "passport" */ './components/passport/Passport.vue'
+      ),
   },
   {
-    path: '/about',
-    name: 'About',
+    path: '/login',
+    name: 'Login',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      import(/* webpackChunkName: "login" */ './components/login/Login.vue'),
+  },
+  {
+    path: '/',
+    name: 'Protected',
+    component: Protected,
+    beforeEnter: (to, from, next) => {
+      console.log('guard')
+      const isAuthenticated = true;
+
+      if (!isAuthenticated) {
+        next({ name: 'Login' });
+      } else {
+        next();
+      }
+    },
+    children: [
+      {
+        path: '',
+        component: () =>
+          import(/* webpackChunkName: "home" */ './components/home/Home.vue'),
+      },
+      {
+        path: 'dashboard',
+        component: () =>
+          import(/* webpackChunkName: "dashboard" */ './components/dashboard/Dashboard.vue'),
+      },
+    ],
   },
 ];
 
