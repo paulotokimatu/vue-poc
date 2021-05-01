@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     Home
+    <b-button type="is-primary">Primary</b-button>
   </div>
 </template>
 
