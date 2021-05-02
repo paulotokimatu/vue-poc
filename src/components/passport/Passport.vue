@@ -5,12 +5,15 @@
 </template>
 
 <script>
-import helpers from '@/store/helpers';
+import { MUTATION_USER_UPDATE } from '@/store/mutations';
+import { ROUTE_NAMES } from '@/router/routes';
 
 const USER_TOKEN_KEY = 'pim-admin-token';
-const isUserExpired = (user) => new Date() > new Date(user.exp * 1000);
-// const decodeUserFromToken = token => jwt.decode(token);
-const decodeUserFromToken = () => {
+const decodeUserFromToken = (token) => {
+  if (!token) {
+    return null;
+  }
+
   return {
     exp: Date.now() / 1000 + 3000,
   };
@@ -18,30 +21,25 @@ const decodeUserFromToken = () => {
 
 export default {
   name: 'Passport',
-  methods: {
-    ...helpers.mutations,
-  },
   mounted: function () {
-    if (!this.$route.query.token) {
-      this.$router.push({ name: 'Login' });
-
-      return;
-    }
-
-    const decodedUser = decodeUserFromToken(this.$route.query.token);
-
-    if (isUserExpired(decodedUser)) {
-      localStorage.removeItem(USER_TOKEN_KEY);
-      this.$router.push({ name: 'Login' });
-
-      return;
-    }
+    const user = decodeUserFromToken(this.$route.query.token);
 
     localStorage.setItem(USER_TOKEN_KEY, this.$route.query.token);
-    this.
-    this.$store.commit('user/update', decodedUser);
 
-    this.$router.push({ name: 'Protected' });
+    this.$store.commit(MUTATION_USER_UPDATE, user);
+    this.$router.push({ name: ROUTE_NAMES.home });
+
+    // if (isUserValid(user)) {
+    //   localStorage.setItem(USER_TOKEN_KEY, this.$route.query.token);
+    //   this.$store.commit(MUTATION_USER_UPDATE, user);
+
+    //   this.$router.push({ name: ROUTE_NAMES.app });
+
+    //   return;
+    // }
+
+    // localStorage.removeItem(USER_TOKEN_KEY);
+    // this.$router.push({ name: ROUTE_NAMES.login });
   },
 };
 </script>

@@ -23,3 +23,6 @@ Problems about Vue:
 
 https://kentcdodds.com/blog/stop-mocking-fetch
 https://github.com/mswjs/msw
+
+
+https://serversideup.net/vue-router-navigation-guards-vuex/

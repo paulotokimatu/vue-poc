@@ -19,6 +19,6 @@ const VoucherApiService = {
   getVoucherList() {
     return this.send(ENDPOINTS.getList, 'GET');
   },
-}
+};
 
 export default VoucherApiService;

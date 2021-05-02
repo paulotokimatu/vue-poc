@@ -2,7 +2,6 @@
   <div>
     <Navbar />
 
-    {{ user }}
     <router-view />
   </div>
 </template>
@@ -10,20 +9,13 @@
 <script>
 import { mapState } from 'vuex';
 import Navbar from '@/components/app/Navbar.vue';
+import { STATE_USER } from '@/store/state';
 
 export default {
   computed: mapState({
-    user: 'user',
+    user: STATE_USER,
   }),
-  data: {
-    id: 1,
-  },
-  name: 'Protected',
-  methods: {
-    bar: function () {
-      return 'bar';
-    },
-  },
+  name: 'App',
   components: {
     Navbar,
   },
