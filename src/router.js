@@ -24,7 +24,7 @@ const routes = [
     name: 'Protected',
     component: Protected,
     beforeEnter: (to, from, next) => {
-      console.log('guard')
+      console.log('guard');
       const isAuthenticated = true;
 
       if (!isAuthenticated) {
@@ -42,7 +42,9 @@ const routes = [
       {
         path: 'dashboard',
         component: () =>
-          import(/* webpackChunkName: "dashboard" */ './components/dashboard/Dashboard.vue'),
+          import(
+            /* webpackChunkName: "dashboard" */ './components/dashboard/Dashboard.vue'
+          ),
       },
     ],
   },
