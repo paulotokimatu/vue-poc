@@ -25,7 +25,6 @@ const routes = [
   },
   {
     path: '/',
-    name: ROUTE_NAMES.app,
     component: () =>
       import(/* webpackChunkName: "home" */ '../components/app/App.vue'),
     children: [
