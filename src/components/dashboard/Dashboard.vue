@@ -1,17 +1,22 @@
 <template>
   <div>
-    <b-table :data="list" :columns="columns"></b-table>
-    <b-pagination
-      class="mt-4"
-      :total="list.length"
-      @change="onPageChange"
-      v-model="currentPage"
-      per-page="2"
-      aria-next-label="Next page"
-      aria-previous-label="Previous page"
-      aria-page-label="Page"
-      aria-current-label="Current page">
-    </b-pagination>
+    <template v-if="list.length == 0">
+      <p>No data loaded!</p>
+    </template>
+    <template v-else>
+      <b-table :data="list" :columns="columns"></b-table>
+      <b-pagination
+        class="mt-4"
+        :total="list.length"
+        @change="onPageChange"
+        v-model="currentPage"
+        per-page="2"
+        aria-next-label="Next page"
+        aria-previous-label="Previous page"
+        aria-page-label="Page"
+        aria-current-label="Current page">
+      </b-pagination>
+    </template>
   </div>
 </template>
 

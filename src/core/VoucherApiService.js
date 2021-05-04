@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const ENDPOINTS = {
   getList: '/list',
 };
@@ -13,12 +15,14 @@ const VoucherApiService = {
     };
 
     if (method !== 'GET') {
-      request.body = JSON.stringify(body);
+      // request.body = JSON.stringify(body);
+      request.data = JSON.stringify(body);
     }
 
-    const response = await fetch(`${process.env.VUE_APP_VOUCHER_API_URL}${url}`, request);
+    // const response = await fetch(`${process.env.VUE_APP_VOUCHER_API_URL}${url}`, request);
+    const response = await axios.request(`${process.env.VUE_APP_VOUCHER_API_URL}${url}`, request);
 
-    return response.json();
+    return response.data;
   },
 
   getVoucherList() {

@@ -1,8 +1,11 @@
-import 'jest-preset-angular';
+import Vue from 'vue';
+import Buefy from 'buefy';
 import '@testing-library/jest-dom';
 import { server } from './mocks/server';
 
 beforeAll(() => {
+  Vue.use(Buefy);
+
   server.listen();
 });
 
