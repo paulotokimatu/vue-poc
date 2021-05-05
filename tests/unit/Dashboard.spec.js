@@ -17,7 +17,7 @@ describe('Dashboard', () => {
     await waitForElementToBeRemoved(getByText('No data loaded!'))
 
     const rows = getAllByRole('row');
-    expect(rows.length).toEqual(6);
+    expect(rows.length).toEqual(3);
 
     const secondPageButton = getByRole('button', { name: 'Page 2.' });
     expect(secondPageButton.classList.contains('is-current')).toBeFalsy();

@@ -7,7 +7,7 @@ export default {
   [MUTATION_USER_UPDATE](state, newUser) {
     state[STATE_USER] = newUser;
   },
-  [MUTATION_VOUCHER_LIST_UPDATE](state, newList) {
-    state[STATE_VOUCHER_LIST] = newList;
+  [MUTATION_VOUCHER_LIST_UPDATE](state, newData) {
+    state[STATE_VOUCHER_LIST] = newData;
   },
 };

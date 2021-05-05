@@ -5,28 +5,28 @@ const ENDPOINTS = {
 };
 
 const VoucherApiService = {
-  async send(url, method, body = {}, headers = {}) {
+  async send(url, method, params = {}, body = {}, headers = {}) {
     const request = {
       method,
+      params,
       headers: {
         'Content-Type': 'application/json',
         ...headers,
       },
     };
 
+    console.log(request)
     if (method !== 'GET') {
-      // request.body = JSON.stringify(body);
       request.data = JSON.stringify(body);
     }
 
-    // const response = await fetch(`${process.env.VUE_APP_VOUCHER_API_URL}${url}`, request);
     const response = await axios.request(`${process.env.VUE_APP_VOUCHER_API_URL}${url}`, request);
 
     return response.data;
   },
 
-  getVoucherList() {
-    return this.send(ENDPOINTS.getList, 'GET');
+  getVoucherList(page, pageSize) {
+    return this.send(`${ENDPOINTS.getList}`, 'GET', { page, pageSize });
   },
 };
 

@@ -4,13 +4,13 @@
       <p>No data loaded!</p>
     </template>
     <template v-else>
-      <b-table :data="list" :columns="columns"></b-table>
+      <b-table :data="list.data" :columns="columns"></b-table>
       <b-pagination
         class="mt-4"
-        :total="list.length"
+        :total="list.total"
         @change="onPageChange"
         v-model="currentPage"
-        per-page="2"
+        :per-page="pageSize"
         aria-next-label="Next page"
         aria-previous-label="Previous page"
         aria-page-label="Page"
@@ -29,14 +29,20 @@ export default {
   name: 'Dashboard',
   methods: {
     onPageChange(newPage) {
-      console.log(newPage);
+      this.update({
+        page: newPage,
+        pageSize: this.pageSize,
+      });
     },
     ...mapActions({
       update: ACTION_VOUCHER_LIST_FETCH,
     })
   },
   async mounted() {
-    this.update();
+    this.update({
+        page: this.currentPage,
+        pageSize: this.pageSize,
+      });
   },
   computed: mapState({
     list: STATE_VOUCHER_LIST,
@@ -69,6 +75,7 @@ export default {
           label: 'Gender',
         },
       ],
+      pageSize: 2,
     };
   },
 };
