@@ -13,7 +13,7 @@ const routes = [
     meta: { isPublic: true },
     component: () =>
       import(
-        /* webpackChunkName: "passport" */ '../components/passport/Passport.vue'
+        /* webpackChunkName: "passport" */ '@/pages/Passport.vue'
       ),
   },
   {
@@ -21,25 +21,25 @@ const routes = [
     name: ROUTE_NAMES.login,
     meta: { isPublic: true },
     component: () =>
-      import(/* webpackChunkName: "login" */ '../components/login/Login.vue'),
+      import(/* webpackChunkName: "login" */ '@/pages/Login.vue'),
   },
   {
     path: '/',
     component: () =>
-      import(/* webpackChunkName: "home" */ '../components/app/App.vue'),
+      import(/* webpackChunkName: "home" */ '@/layout/Default.vue'),
     children: [
       {
         path: '',
         name: ROUTE_NAMES.home,
         component: () =>
-          import(/* webpackChunkName: "home" */ '../components/home/Home.vue'),
+          import(/* webpackChunkName: "home" */ '@/pages/Home.vue'),
       },
       {
         path: 'dashboard',
         name: ROUTE_NAMES.dashboard,
         component: () =>
           import(
-            /* webpackChunkName: "dashboard" */ '../components/dashboard/Dashboard.vue'
+            /* webpackChunkName: "dashboard" */ '@/pages/Dashboard.vue'
           ),
       },
     ],
